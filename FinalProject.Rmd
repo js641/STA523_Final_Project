@@ -1,0 +1,14 @@
+---
+title: "STAT 523 Final Project"
+author: "Team TBA"
+date: "December 11, 2015"
+output: pdf_document
+---
+
+## ui.R
+
+## server.R
+
+## Clustering
+
+## Word Cloud
