@@ -1,2 +1,2 @@
 # STA523_Final_Project
-shiny app interactive with tweeter 
+shiny app interactive with twitter 
