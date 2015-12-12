@@ -50,10 +50,8 @@ PrepareTwitter<-function()
 PrepareTwitter()
 ```
 
-You can also embed plots, for example:
+## Cluster Analysis
 
-```{r, echo=FALSE}
-plot(cars)
-```
+Based on the data we collected, we use cluster analysis to divide them into several groups. The method we use is Ward's Method. This method start out with all sample units in n clusters of size 1 each. In the first step of the algorithm, n - 1 clusters are formed, one of size two and the remaining of size 1. The error sum of squares and r2 values are then computed. The pair of sample units that yield the smallest error sum of squares,  will form the first cluster. Then, in the second step of the algorithm, n - 2 clusters are formed from that n - 1 clusters defined in step 2. These may include two clusters of size 2, or a single cluster of size 3 including the two items clustered in step 1. Again, the value of r2 is maximized. Thus, at each step of the algorithm clusters or observations are combined in such a way as to minimize the results of error from the squares or alternatively maximize the r2 value. The algorithm stops when all sample units are combined into a single large cluster of size n .
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+In this case, we divided the data into 6 groups, we can see the plot as following. Then we output the cluster medoids.
