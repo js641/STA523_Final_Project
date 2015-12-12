@@ -130,7 +130,7 @@ shinyServer(
       })
     
     fit = reactive({
-      hclust(distMatrix(), method="ward.D2",)
+      hclust(distMatrix(), method="ward.D2")
       })
     
     
@@ -169,7 +169,7 @@ shinyServer(
     })
     
     output$text_clustering = renderPlot({
-      plot(fit(),xlab="Word to be clustered",ylab="frequency")
+      plot(fit(),xlab="",ylab="frequency")
       rect.hclust(fit(),input$cluster)
       })
     
