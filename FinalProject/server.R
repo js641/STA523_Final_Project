@@ -31,10 +31,10 @@ shinyServer(
     setup_twitter_oauth(consumer_key, consumer_secret, access_token,access_secret)
     
     tweets = reactive({
-      if (input$content=="topic") {
-        searchTwitter(input$Topic, n = 1000, lang="en")
+      if (input$content == "topic") {
+        searchTwitter(input$Topic, n = input$n_tweets, lang = "en")
       } else {
-        userTimeline(input$tHandle,n=1000)
+        userTimeline(input$tHandle, n = input$n_tweets)
       } 
     })
 ######################################################################################
@@ -43,7 +43,7 @@ shinyServer(
 
     tweets.df = reactive ({
       tmp = twListToDF(tweets())
-      if (input$content=="topic") {
+      if (input$content == "topic") {
         tmp[,1] = str_replace_all(tmp[,1],"[^[:graph:]]", " ") 
         tmp
       } else { tmp }
@@ -60,7 +60,7 @@ shinyServer(
     })
       
       myStopwords = reactive({
-        c(stopwords("english"), tolower(input$Topic),"rt","amp","twitter", "tweets", "tweet", "retweet",
+        c(stopwords("english"), tolower(input$Topic), "just","rt","amp","twitter", "tweets", "tweet", "retweet",
           "tweeting", "account", "via", "cc", "ht")
       })
       
@@ -106,7 +106,7 @@ shinyServer(
     
     freq.terms = reactive ({
       if (input$content=="topic") {
-        findFreqTerms(tdm(), lowfreq=40)
+        findFreqTerms(tdm(), lowfreq=input$n_tweets/25)
       } else {
         findFreqTerms(tdm(), lowfreq=input$freq)
       }

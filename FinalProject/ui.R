@@ -15,8 +15,10 @@ shinyUI(
       selectInput("content", h4("Select for WordCloud Content"), content_select),
       conditionalPanel(
         condition = "input.content == 'topic'",
-        textInput("Topic", h4("Enter Topic of Interest:"),value = "ISIS")
+        textInput("Topic", h4("Enter Topic of Interest:"),value = "Duke")
       ),
+      h4(),
+      sliderInput("n_tweets", "Number of Tweets to be collected:", min=100, max=1000, value=100, step=100),
       h4(),
       conditionalPanel(
         condition="input.content == 'usertag'",
@@ -24,12 +26,12 @@ shinyUI(
       ),
       
       checkboxInput(inputId = "word_freq_assc",
-                    label = strong("Show Words Frequency Association"),
+                    label = strong("Choose word for frequency association"),
                     value = FALSE),
       h4(),
       conditionalPanel(
         condition = "input.word_freq_assc == true",
-        textInput("freq_word",label = "Word to be associated"),
+        textInput("freq_word",label = "Word to be associated:"),
         sliderInput("coorelation",label = "Correlation",min = 0,max = 1, value = 0.2)
       ),
       
