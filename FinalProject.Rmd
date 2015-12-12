@@ -5,10 +5,17 @@ date: "December 11, 2015"
 output: pdf_document
 ---
 
+# Introduction #
+Our final project consists of programming an R Shiny application that performs various types of analysis on data from Twitter. Users will choose between a particular topic (or in Twitter terms, hasthags #) or a specific Twitter handle. If a topic is chosen then the user can write whatever topic comes to mind which also exists on Twitter. The app will then collect 100 random tweets associated with that hashtag in order to build a set of words to analyze or display. Conversely, if a handle is selected then the user can write out the exact handle and the app will again collect 100 (or however many there are that handle has tweeted less than 100 times) of the most recent tweets to analyze.
+
 ## ui.R
+
 
 ## server.R
 
+
 ## Clustering
 
+
 ## Word Cloud
+
