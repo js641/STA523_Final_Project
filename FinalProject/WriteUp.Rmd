@@ -1,0 +1,59 @@
+---
+title: "STA 523 Final Project Write Up"
+author: "Jie Sun, Leonardo Shu, Shijia Bian, Yang Sun, Ziyue Zeng"
+date: "December 12, 2015"
+output: html_document
+---
+
+The goal of our final project is a text mining for the twitter.
+
+## List of Files for the Final Project 
+
+`load_packages.R`
+
+
+## Stage I: Load the Package
+
+Before the anaysis, you need load the packages that are in the file `load_packages.R`.
+
+```{r}
+## Now we load the packages
+EnsurePackage<-function(x)
+{x <- as.character(x)
+if (!require(x,character.only=TRUE))
+{
+  install.packages(pkgs=x,repos="http://cran.r-project.org")
+  require(x,character.only=TRUE)
+}
+}
+
+#Identifying packages required 
+PrepareTwitter<-function()
+{
+  EnsurePackage("httr")
+  EnsurePackage("devtools")
+  EnsurePackage("twitteR")
+  EnsurePackage("base64enc")
+  EnsurePackage("stringr")
+  EnsurePackage("ROAuth")
+  EnsurePackage("RCurl")
+  EnsurePackage("ggplot2")
+  EnsurePackage("tm")
+  EnsurePackage("RJSONIO")
+  EnsurePackage("wordcloud")
+  EnsurePackage("ggplot2") 
+  EnsurePackage("streamR")
+  EnsurePackage("NYU160J")
+  EnsurePackage("grid")
+}
+
+PrepareTwitter()
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
