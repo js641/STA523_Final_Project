@@ -39,7 +39,7 @@ shinyUI(
       
       sliderInput("freq",
                   "Minimum Frequency:",
-                  min = 1,  max = 50, value = 3),
+                  min = 1,  max = 50, value = 2),
       sliderInput("max",
                   "Maximum Number of Words:",
                   min = 1,  max = 300,  value = 100),

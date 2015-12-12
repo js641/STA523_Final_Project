@@ -106,9 +106,9 @@ shinyServer(
     
     freq.terms = reactive ({
       if (input$content=="topic") {
-        findFreqTerms(tdm(), lowfreq=input$n_tweets/25)
+        findFreqTerms(tdm(), lowfreq = input$n_tweets/25)
       } else {
-        findFreqTerms(tdm(), lowfreq=input$freq)
+        findFreqTerms(tdm(), lowfreq = 2)
       }
     })
     
@@ -130,7 +130,7 @@ shinyServer(
       })
     
     fit = reactive({
-      hclust(distMatrix(), method="ward.D2")
+      hclust(distMatrix(), method="ward.D2",)
       })
     
     
@@ -169,7 +169,7 @@ shinyServer(
     })
     
     output$text_clustering = renderPlot({
-      plot(fit())
+      plot(fit(),xlab="Word to be clustered",ylab="frequency")
       rect.hclust(fit(),input$cluster)
       })
     
