@@ -10,16 +10,14 @@ output: pdf_document
 ## Introduction (Basic Functionality)
 Our final project consists of programming an R Shiny application that performs various types of analysis on data from Twitter. Users will choose between a particular topic (or in Twitter terms, hasthags #) or a specific Twitter handle. If a topic is chosen then the user can write whatever topic comes to mind which also exists on Twitter. The app will then collect a user-selected amount of random tweets associated with that hashtag in order to build a set of words to analyze or display. Conversely, if a handle is selected then the user can write out the exact handle and the app will again collect a particular amount (set by the user, or however many tweets that handle has if less than the specified number) of the most recent tweets to analyze. After the topic or handle have been selected, the app will run world cloud, word frequency association & clustering algorihms. The specifics of these will be discused separately alongside with the options available to the user.
 
-## ui.R
+## Scraping from Twitter
 
+## Word Cloud
 
-## server.R
-
+## Word Frequency Association
 
 ## Clustering
 
-
-## Word Cloud
 
 ## Example Usage (Seen in our default app settings)
 A trending topic in the news, and thus Twitter, is the terrorist organization ISIS. If our app runs this as the topic of interest, collecting 100 of latest related tweets we see that our world cloud contains very relevant terms such as terrorists, Obama, US, Syria, terrorism, terror. As we increase the number of tweets we can see some other terms with looser conections such as Russia,  Trump, passports, arrested, fighting are included. If we move to the Word Frequency association and try to use Obama as our key word to associate, words that have at least 0.5 correlation include stop, failure, exposes, turning which indicate quite neatly how divided the POTUS's action are amongst the community. Then as we move to the cluster dendogram option we can see that usual clusters involve Trump, ban (referencing Trump's recent anti-muslim remarks) or Obama and US, or just other words with violent connotations such as beating or escaping. Since the tweets are random and thius topic is popular (along with a fresh stream of tweets every hour), these exact results may not show up but the analysis was repeated various times and the most general results are being discussed.
