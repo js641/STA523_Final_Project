@@ -9,7 +9,7 @@ output: pdf_document
 
 The goal of our final project is a text mining for the twitter.
 
-## List of Files for the Final Project 
+## List of Packages for the Final Project 
 
 `load_packages.R`
 
