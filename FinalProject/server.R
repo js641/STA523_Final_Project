@@ -19,7 +19,7 @@ library(Rgraphviz)
 shinyServer(
   function(input, output, session) 
   {
-    
+    #twitter user authentication
     consumer_key="zSeAWHNpaL5G7GpHuCO4zTffT"
     consumer_secret="dZnarPgWiQCnb1bJ0tvN3xFBmWVMRQCDDWl9UsFtkiTGpzztfG"
     access_token="1071126529-DLvrKbaT9ju1yQsAHBWZz5h3vHGEWWyWYeTHP4Z" 
@@ -27,9 +27,9 @@ shinyServer(
     requestURL = "https://api.twitter.com/oauth/request_token"
     accessURL = "https://api.twitter.com/oauth/access_token"
     authURL = "https://api.twitter.com/oauth/authorize"
-
+    #direct web setup
     setup_twitter_oauth(consumer_key, consumer_secret, access_token,access_secret)
-    
+    #Parse twitts with functions from "twitteR" package.
     tweets = reactive({
       if (input$content == "topic") {
         searchTwitter(input$Topic, n = input$n_tweets, lang = "en")
@@ -40,7 +40,7 @@ shinyServer(
 ######################################################################################
 ######             WORD CLOUD CODE STARTS FROM HERE        ###########################
 ######################################################################################
-
+    #turn the parsed tweets into dataframe and clean up some irregular text.
     tweets.df = reactive ({
       tmp = twListToDF(tweets())
       if (input$content == "topic") {
@@ -48,9 +48,9 @@ shinyServer(
         tmp
       } else { tmp }
     })
-    
+    #a function to remove URL
     removeURL = function(x) gsub("http[[:alnum:]]*", "", x)
-    
+    #Use text mining package "tm" to remove punctuations, numbers and irregular expressions used in tweets.
     myCorpus1 = reactive({
       Corpus(VectorSource(tweets.df()[,1])) %>%
       tm_map(content_transformer(tolower)) %>%      
@@ -58,12 +58,12 @@ shinyServer(
       tm_map(content_transformer(removeNumbers)) %>% 
       tm_map(content_transformer(removeURL))
     })
-      
+    #initiates stopwwords, especially garbage words in tweets.
       myStopwords = reactive({
         c(stopwords("english"), tolower(input$Topic), "just","rt","amp","twitter", "tweets", "tweet", "retweet",
           "tweeting", "account", "via", "cc", "ht")
       })
-      
+    #clean the text using the stopwords.
       myCorpus = reactive ({
       myCorpus1()%>% 
       tm_map(removeWords, myStopwords()) %>% 
@@ -81,11 +81,11 @@ shinyServer(
     word.freq = reactive ({
       sort(rowSums(m()), decreasing = T)
     }) 
-    
+    #minumum freqency of the words in tweets.
     min_word_freq= reactive({
       input$freq
     })
-    
+    #maximum number of words chosen by the user.
     max_word_num = reactive ({
       input$max
     })
@@ -96,7 +96,7 @@ shinyServer(
 ######################################################################################
 ######             WORD Freq CODE STARTS                   ###########################
 ######################################################################################
-    
+    #define the frequency terms
     freq.terms = reactive ({
       if (input$content=="topic") {
         findFreqTerms(tdm(), lowfreq = input$n_tweets/25)
@@ -139,7 +139,7 @@ shinyServer(
     output$word_association= renderPlot({
       plot(tdm(), term = freq.terms(), corThreshold = 0.12, weighting = T)
     })
-    ?plot
+    
     output$word_assc_table = renderTable({
       as.data.frame(findAssocs(tdm(), tolower(input$freq_word), input$coorelation))
     })
