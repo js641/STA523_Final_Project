@@ -20,43 +20,6 @@ The word cloud is analyzed by usring the `twitterR` package. The goal of this se
 
 Word Associations plot provides a visualization of word association in the tweeter we just parsed from a particular subject of interest. And we can use the "tm" package to perform word association analysis. We also provide customized choice for user to select whether they want to show words to be associated with a particular word they are interested in.
 
-```{r,echo=FALSE}
-suppressMessages(library(twitteR))
-consumer_key<-"zSeAWHNpaL5G7GpHuCO4zTffT"
-consumer_secret<-"dZnarPgWiQCnb1bJ0tvN3xFBmWVMRQCDDWl9UsFtkiTGpzztfG"
-access_token<-"1071126529-DLvrKbaT9ju1yQsAHBWZz5h3vHGEWWyWYeTHP4Z" 
-access_secret<-"h3XgPKhsKkF66ShXfbFPEnby2VUofGD6AYvu53CFvUFX7" 
-requestURL <- "https://api.twitter.com/oauth/request_token"
-accessURL <- "https://api.twitter.com/oauth/access_token"
-authURL <- "https://api.twitter.com/oauth/authorize"
-
-setup_twitter_oauth(consumer_key, consumer_secret, access_token,access_secret)
-
-##Seach for random Topic
-tweets = searchTwitter("statistics",n = 500)
-##Search for users use 
-
-suppressMessages(library(tm))
-suppressMessages(library(SnowballC))
-suppressMessages(library(stringr))
-n.tweet = length(tweets)
-
-tweets.df = twListToDF(tweets)
-tweets.df$text=str_replace_all(tweets.df$text,"[^[:graph:]]", " ") 
-library(magrittr)
-removeURL = function(x) gsub("http[[:alnum:]]*", "", x)
-myStopwords = c(stopwords("english"), "isis","rt","amp","twitter", "tweets", "tweet", "retweet",
-                "tweeting", "account", "via", "cc", "ht")
-
-myCorpus = Corpus(VectorSource(tweets.df$text)) %>%
-           tm_map(content_transformer(tolower)) %>%
-           tm_map(content_transformer(removePunctuation)) %>%
-           tm_map(content_transformer(removeNumbers)) %>% 
-           tm_map(content_transformer(removeURL)) %>%
-           tm_map(removeWords, myStopwords) %>% 
-           tm_map(content_transformer(stemDocument))
-```
-
 First, by creating a Term Document Matrix using "tm" packages, we find further use the function to find the frequent words with minimum frequency, in this example, the minimum frequency is 50.
 
 Then we use "Rgraphviz" packages that allows us to plot the word association map with weighting as well as provides a better visualization of relationship between words.
