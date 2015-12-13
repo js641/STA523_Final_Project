@@ -7,6 +7,50 @@ output: pdf_document
 
 # Twitter Mysteries User Manual #
 
+The goal of our final project is a text mining for the twitter.
+
+## List of Files for the Final Project 
+
+`load_packages.R`
+
+
+## Stage 0: Load the Package
+
+Before the anaysis, you need load the packages that are in the file `load_packages.R`.
+
+```{r}
+## Now we load the packages
+EnsurePackage<-function(x)
+{x <- as.character(x)
+if (!require(x,character.only=TRUE))
+{
+  install.packages(pkgs=x,repos="http://cran.r-project.org")
+  require(x,character.only=TRUE)
+}
+}
+
+#Identifying packages required 
+PrepareTwitter<-function()
+{
+  EnsurePackage("httr")
+  EnsurePackage("devtools")
+  EnsurePackage("twitteR")
+  EnsurePackage("base64enc")
+  EnsurePackage("stringr")
+  EnsurePackage("ROAuth")
+  EnsurePackage("RCurl")
+  EnsurePackage("ggplot2")
+  EnsurePackage("tm")
+  EnsurePackage("RJSONIO")
+  EnsurePackage("wordcloud")
+  EnsurePackage("ggplot2") 
+  EnsurePackage("streamR")
+  EnsurePackage("NYU160J")
+  EnsurePackage("grid")
+}
+
+PrepareTwitter()
+```
 ## Introduction (Basic Functionality)
 Our final project consists of programming an R Shiny application that performs various types of analysis on data from Twitter. Users will choose between a particular topic (or in Twitter terms, hasthags #) or a specific Twitter handle. If a topic is chosen then the user can write whatever topic comes to mind which also exists on Twitter. The app will then collect a user-selected amount of random tweets associated with that hashtag in order to build a set of words to analyze or display. Conversely, if a handle is selected then the user can write out the exact handle and the app will again collect a particular amount (set by the user, or however many tweets that handle has if less than the specified number) of the most recent tweets to analyze. After the topic or handle have been selected, the app will run world cloud, word frequency association & clustering algorihms. The specifics of these will be discused separately alongside with the options available to the user.
 
@@ -72,6 +116,9 @@ output$word_assc_table = renderTable({
 
 ## Clustering
 
+Based on the data we collected, we use cluster analysis to divide them into several groups. The method we use is Ward's Method. This method start out with all sample units in n clusters of size 1 each. In the first step of the algorithm, n - 1 clusters are formed, one of size two and the remaining of size 1. The error sum of squares and r2 values are then computed. The pair of sample units that yield the smallest error sum of squares,  will form the first cluster. Then, in the second step of the algorithm, n - 2 clusters are formed from that n - 1 clusters defined in step 2. These may include two clusters of size 2, or a single cluster of size 3 including the two items clustered in step 1. Again, the value of r2 is maximized. Thus, at each step of the algorithm clusters or observations are combined in such a way as to minimize the results of error from the squares or alternatively maximize the r2 value. The algorithm stops when all sample units are combined into a single large cluster of size n .
+
+In our apps, we let the user choose the cluster number and their interested topics. By running our clustering algorithm, the user is able to see the most relavent words regarding the topic s/he choosed before. What's more, the user is able to see how these words being clustered into k categories according to their distance.Words in red rectangular lines are clustered into one group which implies these words share the most closest distance comparing with other word groups. 
 
 ## Example Usage (Seen in our default app settings)
 A trending topic in the news, and thus Twitter, is the terrorist organization ISIS. If our app runs this as the topic of interest, collecting 100 of latest related tweets we see that our world cloud contains very relevant terms such as terrorists, Obama, US, Syria, terrorism, terror. As we increase the number of tweets we can see some other terms with looser conections such as Russia,  Trump, passports, arrested, fighting are included. If we move to the Word Frequency association and try to use Obama as our key word to associate, words that have at least 0.5 correlation include stop, failure, exposes, turning which indicate quite neatly how divided the POTUS's action are amongst the community. Then as we move to the cluster dendogram option we can see that usual clusters involve Trump, ban (referencing Trump's recent anti-muslim remarks) or Obama and US, or just other words with violent connotations such as beating or escaping. Since the tweets are random and thius topic is popular (along with a fresh stream of tweets every hour), these exact results may not show up but the analysis was repeated various times and the most general results are being discussed.
