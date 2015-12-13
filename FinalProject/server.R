@@ -70,13 +70,6 @@ shinyServer(
       tm_map(content_transformer(stemDocument))
     })
     
-    reactive ({
-      for(i in 1:5) {
-        cat(paste("[[", i, "]]", sep = ""))
-        writeLines(as.character(myCorpus()[[i]]))
-      }
-    })
-    
     tdm = reactive ({
       TermDocumentMatrix(myCorpus(), control = list(wordLengths = c(1, Inf))) 
     })
@@ -134,23 +127,6 @@ shinyServer(
       })
     
     
-    #partitioning around medoids with estimation of number of clusters
-    
-    #m3 = reactive({
-      #t(m2())
-      #}) # transpose the matrix to cluster documents(tweets)
-    
-    #pamResult = reactive({
-      #pamk(m3(), metric="manhanttan")
-      #})
-    
-    #k1 = reactive({
-      #pamResult()$nc
-      #}) #number of clusters identified
-    
-    #pamResult1 = reactive({
-      #pamResult()$pamobject
-      #})
 ############################################################################
 ##Output Plot 
 ###########################################################################
@@ -172,12 +148,6 @@ shinyServer(
       plot(fit(),xlab="",ylab="frequency")
       rect.hclust(fit(),input$cluster)
       })
-    
-    #output$pam_plot = renderPlot({
-      #layout(matrix(c(1, 2),1, 2))
-      #plot(pamResult(), col.p = pamResult()$clustering)
-      #})
-    
     
 }
 )
