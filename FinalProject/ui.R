@@ -15,7 +15,7 @@ shinyUI(
       selectInput("content", h4("Select for WordCloud Content"), content_select),
       conditionalPanel(
         condition = "input.content == 'topic'",
-        textInput("Topic", h4("Enter Topic of Interest:"),value = "Twitter")
+        textInput("Topic", h4("Enter Topic of Interest:"),value = "statistics")
       ),
       h4(),
       sliderInput("n_tweets", "Number of Tweets to be collected:", min=100, max=1000, value=100, step=100),
@@ -38,10 +38,10 @@ shinyUI(
       h4(),
       
       sliderInput("freq",
-                  "Minimum Frequency:",
+                  "Minimum Frequency in WordCloud:",
                   min = 1,  max = 50, value = 2),
       sliderInput("max",
-                  "Maximum Number of Words:",
+                  "Maximum Number of Words in WordCloud:",
                   min = 1,  max = 300,  value = 100),
       sliderInput("cluster",
                   "Maximum Number of Clusters:",
