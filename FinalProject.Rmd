@@ -192,3 +192,6 @@ On the other hand, we can try to search a specific Twitter handle. We chose our 
 
 ## Errors
 Due to the random nature of many tweets and how very different ones can be grouped together by an specific topic or user, it could be the case that the app encounters some errors. For example, some users may not have many tweets and thus word association could be invalid. In addition, there may be a topic that doesn't has too many unique words and this overblows the capabilities of the clustering paramaeters. Issues like this may be solved by tuning the available options such as minimum frequency count or number of clusters to be set. We urge that a error screen does not mean the app cannot still work for other configurations.
+
+### Citation
+'http://www.slideshare.net/rdatamining/text-mining-with-r-an-analysis-of-twitter-data'
