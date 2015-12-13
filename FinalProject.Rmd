@@ -14,6 +14,8 @@ Our final project consists of programming an R Shiny application that performs v
 
 ## Word Cloud
 
+The word cloud is analyzed by usring the `twitterR` package. The goal of this section is to create a visualization of the most frequent words associated with the user's input string. For example, if the user enters "Christmas", this part will collect up to 3,200 twitts that are associated with the "Christmas". All the twitts are treated as a whole. The `tm_map` will be applied to clean out the the text by removing punctuations, selecting preferred languages, excluding certain pattern of the words and setting up the stop words. The left over strings will be ordered according to their frequency. The word cloud will display the graph based on the frequency of the key words.
+
 ## Word Frequency Association
 
 ## Clustering
